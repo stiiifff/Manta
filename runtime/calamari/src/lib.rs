@@ -55,7 +55,7 @@ use frame_system::{
 	EnsureRoot,
 };
 use manta_primitives::{
-	constants::time::*,
+	constants::{time::*, STAKING_PALLET_ID, TREASURY_PALLET_ID},
 	prod_or_fast,
 	types::{AccountId, AuraId, Balance, BlockNumber, Hash, Header, Index, Signature},
 };
@@ -492,7 +492,7 @@ parameter_types! {
 	pub const ProposalBondMaximum: Balance = 10_000 * KMA;
 	pub SpendPeriod: BlockNumber = prod_or_fast!(6 * DAYS, 2 * MINUTES, "CALAMARI_SPENDPERIOD");
 	pub const Burn: Permill = Permill::from_percent(0);
-	pub const TreasuryPalletId: PalletId = PalletId(*b"py/trsry");
+	pub const TreasuryPalletId: PalletId = TREASURY_PALLET_ID;
 }
 
 type EnsureRootOrThreeFifthsCouncil = EnsureOneOf<
@@ -795,7 +795,7 @@ impl pallet_aura::Config for Runtime {
 
 parameter_types! {
 	// Pallet account for record rewards and give rewards to collator.
-	pub const PotId: PalletId = PalletId(*b"PotStake");
+	pub const PotId: PalletId = STAKING_PALLET_ID;
 }
 
 parameter_types! {
